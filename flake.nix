@@ -8,17 +8,13 @@
 
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
+      imports = [
+        ./nix/flake-module.nix
+      ];
+
       systems = [
         "x86_64-linux"
         "aarch64-linux"
       ];
-
-      perSystem = {pkgs, ...}: {
-        devShells.default = import ./nix/shell.nix {inherit pkgs;};
-
-        formatter = pkgs.alejandra;
-
-        checks = import ./nix/checks {inherit pkgs;};
-      };
     };
 }
