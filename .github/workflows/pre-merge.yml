@@ -23,27 +23,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v16
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: DeterminateSystems/nix-installer-action@v16
 
       - name: Enforce branch naming
         env:
           BRANCH_NAME: ${{ github.head_ref }}
         run: ./.github/scripts/validate-naming.sh --branch "$BRANCH_NAME"
 
-      - name: Enforce commit naming and no merges
+      - name: Enforce commits naming and no merges
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: ./.github/scripts/validate-commits.sh
 
-      - name: Run format check
-        run: nix develop -c format-check
-
-      - name: Run tests
-        run: nix develop -c test-all
+      - run: nix develop -c format-check
+      - run: nix develop -c code-check

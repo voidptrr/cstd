@@ -14,6 +14,7 @@
         config.packages.format-all
         config.packages.format-check
         config.packages.test-all
+        config.packages.code-check
       ];
     };
   };
