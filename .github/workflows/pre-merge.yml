@@ -23,12 +23,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v16
 
       - name: Enforce branch naming
@@ -42,8 +40,5 @@ jobs:
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: ./.github/scripts/validate-commits.sh
 
-      - name: Run format check
         run: nix develop -c format-check
-
-      - name: Run tests
-        run: nix develop -c test-all
+        run: nix develop -c code-check
