@@ -26,6 +26,9 @@ markdown_extensions:
   - pymdownx.superfences
 extra_css:
   - stylesheets/extra.css
+extra:
+  version:
+    provider: mike
 nav:
   - cstd:
       - Overview: index.md

@@ -1,6 +1,6 @@
 {pkgs}:
 pkgs.writeShellApplication {
-  name = "docs-build";
+  name = "docs-mike";
   runtimeInputs = [
     (pkgs.python3.withPackages (ps: [
       ps.mkdocs
@@ -12,6 +12,6 @@ pkgs.writeShellApplication {
     set -eu
 
     cd docs
-    mkdocs build --strict
+    mike "$@"
   '';
 }
