@@ -14,8 +14,10 @@
  * +----------------------+------------------------+
  */
 
+/* Comparator callback: negative if a < b, zero if equal, positive if a > b. */
 typedef int (*cstd_heap_cmp_fn)(const void *a, const void *b);
 
+/* Heap object wrapping vector storage and comparator policy. */
 typedef struct cstd_binary_heap {
     cstd_vector root;
     cstd_heap_cmp_fn cmp;
