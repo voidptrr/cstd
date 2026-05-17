@@ -5,6 +5,7 @@ pkgs.writeShellApplication {
     (pkgs.python3.withPackages (ps: [
       ps.mkdocs
       ps.mkdocs-material
+      ps.mike
     ]))
   ];
   text = ''
